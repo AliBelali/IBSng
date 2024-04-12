@@ -19,6 +19,7 @@ RUN sed -i '1ilocal IBSng ibs trust' /var/lib/pgsql/data/pg_hba.conf
 
 RUN su - postgres \
  && createuser ibs \
+ && createdb IBSng \
  && createlang plpgsql IBSng \
  && exit
 
@@ -34,7 +35,7 @@ RUN service iptables stop \
 RUN sed -i '1iServerName 127.0.0.1' /etc/httpd/conf/httpd.conf \
  && sed -i '1i#coding:utf-8' /usr/local/IBSng/core/lib/IPy.py \
  && sed -i '1i#coding:utf-8' /usr/local/IBSng/core/lib/mschap/des_c.py \
- && sed -i '25s/$timeArr=".*"/$timeArr=”IRDT/4.0/DST”;/g'  /usr/local/IBSng/interface/IBSng/inc/error.php
+ && sed -i '25s+$timeArr=".*";+$timeArr="IRDT/4.0/DST";+g'  /usr/local/IBSng/interface/IBSng/inc/error.php
 
 RUN service iptables start \
  && service postgresql start \
