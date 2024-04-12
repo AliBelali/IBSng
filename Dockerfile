@@ -2,7 +2,7 @@ FROM centos:6
 
 #Add REPO because CentOS:6 End Of Life
 RUN curl https://www.getpagespeed.com/files/centos6-eol.repo --output /etc/yum.repos.d/CentOS-Base.repo
-RUN yum update
+RUN yum update -y
 
 RUN yum install -y httpd postgresql postgresql-server postgresql-python php perl nano wget sed
 
