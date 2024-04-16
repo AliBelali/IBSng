@@ -4,7 +4,7 @@ FROM centos:6
 RUN curl https://www.getpagespeed.com/files/centos6-eol.repo --output /etc/yum.repos.d/CentOS-Base.repo
 RUN yum update -y
 
-RUN yum install -y httpd postgresql postgresql-server postgresql-python php perl nano wget sed
+RUN yum install -y httpd postgresql postgresql-server postgresql-python php perl nano wget sed openssh-clients
 
 RUN sed -i 's/SELINUX=".*"/SELINUX=\"disabled\"/g'  /etc/selinux/config
 
