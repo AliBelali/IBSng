@@ -1,5 +1,5 @@
 # IBSng Radius Server Docker
-IBSng 1.24 Web-Based Accounting on CentOS 6 with Docker
+IBSng 1.24 Web-Based Accounting based CentOS 6 Docker
 
 Attention #1:
 
