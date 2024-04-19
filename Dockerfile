@@ -28,8 +28,7 @@ RUN  service postgresql restart
 
 RUN /usr/local/IBSng/scripts/setup.py
 
-RUN service iptables stop \
- && service postgresql stop \
+RUN service postgresql stop \
  && service httpd stop
 
 RUN sed -i '1iServerName 127.0.0.1' /etc/httpd/conf/httpd.conf \
@@ -37,8 +36,7 @@ RUN sed -i '1iServerName 127.0.0.1' /etc/httpd/conf/httpd.conf \
  && sed -i '1i#coding:utf-8' /usr/local/IBSng/core/lib/mschap/des_c.py \
  && sed -i '25s+$timeArr=".*";+$timeArr="IRDT/4.0/DST";+g'  /usr/local/IBSng/interface/IBSng/inc/error.php
 
-RUN service iptables start \
- && service postgresql start \
+RUN service postgresql start \
  && service httpd start \
  && service IBSng start \
  && chkconfig postgresql on \
@@ -48,12 +46,6 @@ RUN service iptables start \
 RUN sed -i '1idate.timezone =”Asia/Tehran”' /etc/php.ini 
 
 RUN service httpd restart
-
-
-RUN iptables -A INPUT -p tcp -m state –state NEW -m tcp –dport 80 -j ACCEPT \
- && iptables -A INPUT -p tcp -m state –state NEW -m tcp –dport 1812 -j ACCEPT \
- && iptables -A INPUT -p tcp -m state –state NEW -m tcp –dport 1813 -j ACCEPT
-
 
 ADD IBSng_backup.sh /IBSng_backup.sh
 ADD run.sh /run.sh
