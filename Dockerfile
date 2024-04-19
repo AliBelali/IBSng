@@ -8,7 +8,7 @@ RUN yum install -y httpd postgresql postgresql-server postgresql-python php perl
 
 RUN sed -i 's/SELINUX=".*"/SELINUX=\"disabled\"/g'  /etc/selinux/config
 
-RUN wget https://netcologne.dl.sourceforge.net/project/ibsng/IBSng-A1.24.tar.bz2 \
+ADD IBSng-A1.24.tar.bz2 /IBSng-A1.24.tar.bz2 \
  && tar -xvjf IBSng-A1.24.tar.bz2 -C /usr/local/ \
  && rm IBSng-A1.24.tar.bz2
 
