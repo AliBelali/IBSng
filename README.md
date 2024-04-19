@@ -29,8 +29,8 @@ bash <(curl -sSL https://get.docker.com)
 2. Clone the Project Repository:
 
 ```
-git clone https://github.com/AliBelali/ibsng.git
-cd ibsng
+git clone https://github.com/AliBelali/IBSng.git
+cd IBSng/
 ```
 3. Start the Service
 ```
@@ -38,7 +38,7 @@ docker compose up -d -p 80:80 ./
 ```
 
 
-web UI: http://<Your IP>/IBSng/admin user : system pass: admin
+web UI: http://Your-IP/IBSng/admin user : system pass: admin
 
 You can mount postgresql database from your host:
 
