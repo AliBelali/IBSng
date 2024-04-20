@@ -6,9 +6,7 @@ RUN yum update -y
 
 RUN yum install -y httpd postgresql postgresql-server postgresql-python php perl nano wget sed openssh-clients
 
-RUN sed -i 's/SELINUX=".*"/SELINUX=\"disabled\"/g'  /etc/selinux/config
-
-ADD IBSng-A1.24.tar.bz2 /IBSng-A1.24.tar.bz2
+COPY IBSng-A1.24.tar.bz2 /IBSng-A1.24.tar.bz2
 RUN tar -xvjf IBSng-A1.24.tar.bz2 -C /usr/local/
 
 RUN service postgresql initdb \
@@ -17,7 +15,7 @@ RUN service postgresql initdb \
 RUN sed -i '1ilocal IBSng ibs trust' /var/lib/pgsql/data/pg_hba.conf
 
 RUN su - postgres \
- && createuser ibs \
+ && createuser -s -i -d -r -l -w ibs \
  && createdb IBSng \
  && createlang plpgsql IBSng \
  && exit
