@@ -41,10 +41,13 @@ RUN chown -R apache:apache /var/www/html
 RUN cp -f /usr/local/IBSng/addons/logrotate/IBSng /etc/logrotate.d/
 RUN cp -f /usr/local/IBSng/init.d/IBSng.init.redhat /etc/init.d/IBSng
 
+ADD auto-db-conf.py /auto-db-conf.py
 ADD IBSng_backup.sh /IBSng_backup.sh
 ADD run.sh /run.sh
 RUN chmod +x /run.sh \
  && chmod +x /IBSng_backup.sh \
+ && chmod +x /auto-db-conf.py \
  && mkdir /backup
+RUN /auto-db-conf.py
 
 CMD ["/run.sh"]
