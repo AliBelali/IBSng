@@ -25,13 +25,16 @@ RUN service postgresql initdb \
  && sleep 2 \
  && su postgres -c 'createuser -s -i -d -r -l -w ibs' \
  && su postgres -c 'createdb IBSng' \
- && su postgres -c 'createlang plpgsql IBSng' \
- && /auto-db-conf.py
+ && su postgres -c 'createlang plpgsql IBSng'
 
 RUN sed -i '1i#coding:utf-8' /usr/local/IBSng/core/lib/IPy.py \
  && sed -i '1i#coding:utf-8' /usr/local/IBSng/core/lib/mschap/des_c.py \
  && sed -i '25s+$timeArr=.*;+$timeArr="IRDT/4.0/DST";+g'  /usr/local/IBSng/interface/IBSng/inc/error.php
- 
+
+RUN /etc/init.d/postgresql start \                              
+ && sleep 3 \
+ && /auto-db-conf.py
+
 #RUN /usr/local/IBSng/scripts/setup.py
 #compile
 RUN /usr/local/IBSng/core/defs_lib/defs2sql.py -i /usr/local/IBSng/core/defs_lib/defs_defaults.py /usr/local/IBSng/db/defs.sql 1>/dev/null 2>/dev/null
