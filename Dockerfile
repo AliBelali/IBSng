@@ -26,7 +26,7 @@ RUN service postgresql initdb \
 
 RUN sed -i '1i#coding:utf-8' /usr/local/IBSng/core/lib/IPy.py \
  && sed -i '1i#coding:utf-8' /usr/local/IBSng/core/lib/mschap/des_c.py \
- && sed -i '25s+$timeArr=".*";+$timeArr="IRDT/4.0/DST";+g'  /usr/local/IBSng/interface/IBSng/inc/error.php
+ && sed -i '25s+$timeArr=.*;+$timeArr="IRDT/4.0/DST";+g'  /usr/local/IBSng/interface/IBSng/inc/error.php
  
 #RUN /usr/local/IBSng/scripts/setup.py
 #compile
@@ -34,7 +34,7 @@ RUN /usr/local/IBSng/core/defs_lib/defs2sql.py -i /usr/local/IBSng/core/defs_lib
 RUN mkdir /var/log/IBSng
 RUN chmod 770 /var/log/IBSng
 RUN cp -f /usr/local/IBSng/addons/apache/ibs.conf /etc/httpd/conf.d
-RUN chown -R root /usr/local/IBSng
+RUN chown -R root:root /usr/local/IBSng
 RUN chown -R apache:apache /var/log/IBSng
 RUN chown -R apache:apache /usr/local/IBSng/interface/smarty/templates_c
 RUN chown -R apache:apache /var/www/html
