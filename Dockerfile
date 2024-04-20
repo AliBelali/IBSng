@@ -29,6 +29,15 @@ RUN sed -i '1i#coding:utf-8' /usr/local/IBSng/core/lib/IPy.py \
  && sed -i '25s+$timeArr=".*";+$timeArr="IRDT/4.0/DST";+g'  /usr/local/IBSng/interface/IBSng/inc/error.php
  
 #RUN /usr/local/IBSng/scripts/setup.py
+#compile
+RUN /usr/local/IBSng/core/defs_lib/defs2sql.py -i /usr/local/IBSng/core/defs_lib/defs_defaults.py /usr/local/IBSng/db/defs.sql 1>/dev/null 2>/dev/null"
+RUN mkdir /var/log/IBSng
+RUN chmod 770 /var/log/IBSng
+RUN cp -f /usr/local/IBSng/addons/apache/ibs.conf /etc/httpd/conf.d
+RUN chown root /var/log/IBSng
+RUN chown apache /usr/local/IBSng/interface/smarty/templates_c
+RUN cp -f /usr/local/IBSng/addons/logrotate/IBSng /etc/logrotate.d/
+
 
 RUN service postgresql start \
  && service httpd start
