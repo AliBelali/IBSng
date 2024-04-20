@@ -13,8 +13,8 @@ RUN sed -i '1idate.timezone =”Asia/Tehran”' /etc/php.ini \
 COPY IBSng-A1.24.tar.bz2 /IBSng-A1.24.tar.bz2
 RUN tar -xvjf IBSng-A1.24.tar.bz2 -C /usr/local/
 
-ADD auto-db-conf.py /auto-db-conf.py \
- && chmod +x /auto-db-conf.py
+ADD auto-db-conf.py /auto-db-conf.py
+RUN chmod +x /auto-db-conf.py
 
 RUN sed -i '114 s/./#&/' /etc/init.d/postgresql
 
