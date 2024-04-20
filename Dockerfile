@@ -37,10 +37,7 @@ RUN cp -f /usr/local/IBSng/addons/apache/ibs.conf /etc/httpd/conf.d
 RUN chown root /var/log/IBSng
 RUN chown apache /usr/local/IBSng/interface/smarty/templates_c
 RUN cp -f /usr/local/IBSng/addons/logrotate/IBSng /etc/logrotate.d/
-
-
-RUN service postgresql start \
- && service httpd start
+RUN cp -f /usr/local/IBSng/init.d/IBSng.init.redhat /etc/init.d/IBSng
 
 ADD IBSng_backup.sh /IBSng_backup.sh
 ADD run.sh /run.sh
