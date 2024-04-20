@@ -28,15 +28,7 @@ RUN sed -i '1i#coding:utf-8' /usr/local/IBSng/core/lib/IPy.py \
  && sed -i '1i#coding:utf-8' /usr/local/IBSng/core/lib/mschap/des_c.py \
  && sed -i '25s+$timeArr=".*";+$timeArr="IRDT/4.0/DST";+g'  /usr/local/IBSng/interface/IBSng/inc/error.php
  
-RUN /usr/local/IBSng/scripts/setup.py
-
-RUN service postgresql stop \
- && service httpd stop
-
-RUN sed -i '1iServerName 127.0.0.1' /etc/httpd/conf/httpd.conf \
- && sed -i '1i#coding:utf-8' /usr/local/IBSng/core/lib/IPy.py \
- && sed -i '1i#coding:utf-8' /usr/local/IBSng/core/lib/mschap/des_c.py \
- && sed -i '25s+$timeArr=".*";+$timeArr="IRDT/4.0/DST";+g'  /usr/local/IBSng/interface/IBSng/inc/error.php
+#RUN /usr/local/IBSng/scripts/setup.py
 
 RUN service postgresql start \
  && service httpd start
