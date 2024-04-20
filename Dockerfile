@@ -13,6 +13,9 @@ RUN sed -i '1idate.timezone =”Asia/Tehran”' /etc/php.ini \
 COPY IBSng-A1.24.tar.bz2 /IBSng-A1.24.tar.bz2
 RUN tar -xvjf IBSng-A1.24.tar.bz2 -C /usr/local/
 
+ADD auto-db-conf.py /auto-db-conf.py
+ && chmod +x /auto-db-conf.py
+
 RUN sed -i '114 s/./#&/' /etc/init.d/postgresql
 
 RUN service postgresql initdb \
@@ -23,6 +26,7 @@ RUN service postgresql initdb \
  && su postgres -c 'createuser -s -i -d -r -l -w ibs' \
  && su postgres -c 'createdb IBSng' \
  && su postgres -c 'createlang plpgsql IBSng'
+ && /auto-db-conf.py
 
 RUN sed -i '1i#coding:utf-8' /usr/local/IBSng/core/lib/IPy.py \
  && sed -i '1i#coding:utf-8' /usr/local/IBSng/core/lib/mschap/des_c.py \
@@ -41,13 +45,12 @@ RUN chown -R apache:apache /var/www/html
 RUN cp -f /usr/local/IBSng/addons/logrotate/IBSng /etc/logrotate.d/
 RUN cp -f /usr/local/IBSng/init.d/IBSng.init.redhat /etc/init.d/IBSng
 
-ADD auto-db-conf.py /auto-db-conf.py
+
 ADD IBSng_backup.sh /IBSng_backup.sh
 ADD run.sh /run.sh
 RUN chmod +x /run.sh \
  && chmod +x /IBSng_backup.sh \
- && chmod +x /auto-db-conf.py \
  && mkdir /backup
-RUN /auto-db-conf.py
+
 
 CMD ["/run.sh"]
