@@ -12,7 +12,6 @@ RUN sed -i '1idate.timezone =”Asia/Tehran”' /etc/php.ini \
 
 COPY IBSng-A1.24.tar.bz2 /IBSng-A1.24.tar.bz2
 RUN tar -xvjf IBSng-A1.24.tar.bz2 -C /usr/local/
-RUN chown -R root /usr/local/IBSng
 
 RUN sed -i '114 s/./#&/' /etc/init.d/postgresql
 
@@ -35,8 +34,10 @@ RUN /usr/local/IBSng/core/defs_lib/defs2sql.py -i /usr/local/IBSng/core/defs_lib
 RUN mkdir /var/log/IBSng
 RUN chmod 770 /var/log/IBSng
 RUN cp -f /usr/local/IBSng/addons/apache/ibs.conf /etc/httpd/conf.d
-RUN chown root /var/log/IBSng
-RUN chown -R apache /usr/local/IBSng/interface/smarty/templates_c
+RUN chown -R root /usr/local/IBSng
+RUN chown -R apache:apache /var/log/IBSng
+RUN chown -R apache:apache /usr/local/IBSng/interface/smarty/templates_c
+RUN chown -R apache:apache /var/www/html
 RUN cp -f /usr/local/IBSng/addons/logrotate/IBSng /etc/logrotate.d/
 RUN cp -f /usr/local/IBSng/init.d/IBSng.init.redhat /etc/init.d/IBSng
 
