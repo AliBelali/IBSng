@@ -31,9 +31,9 @@ RUN sed -i '1i#coding:utf-8' /usr/local/IBSng/core/lib/IPy.py \
  && sed -i '1i#coding:utf-8' /usr/local/IBSng/core/lib/mschap/des_c.py \
  && sed -i '25s+$timeArr=.*;+$timeArr="IRDT/4.0/DST";+g'  /usr/local/IBSng/interface/IBSng/inc/error.php
 
-RUN /etc/init.d/postgresql start \                              
- && sleep 3 \
- && /auto-db-conf.py
+RUN /etc/init.d/postgresql stop; exit 0 \
+ && sleep 5 \
+ && /etc/init.d/postgresql stop; exit 0
 
 #RUN /usr/local/IBSng/scripts/setup.py
 #compile
@@ -48,6 +48,9 @@ RUN chown -R apache:apache /var/www/html
 RUN cp -f /usr/local/IBSng/addons/logrotate/IBSng /etc/logrotate.d/
 RUN cp -f /usr/local/IBSng/init.d/IBSng.init.redhat /etc/init.d/IBSng
 
+RUN /etc/init.d/postgresql start \
+ && sleep 3 \
+ && /auto-db-conf.py
 
 ADD IBSng_backup.sh /IBSng_backup.sh
 ADD run.sh /run.sh
