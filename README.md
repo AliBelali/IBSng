@@ -32,9 +32,9 @@ bash <(curl -sSL https://get.docker.com)
 git clone https://github.com/AliBelali/IBSng.git
 cd IBSng/
 ```
-3. Start the Service
+3. Build Docker Image
 ```
-docker compose up -d -p 80:80 ./
+docker build -t alibelali/ibsng ./
 ```
 
 
