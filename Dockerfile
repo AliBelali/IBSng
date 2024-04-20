@@ -13,7 +13,7 @@ RUN sed -i '1idate.timezone =”Asia/Tehran”' /etc/php.ini \
 COPY IBSng-A1.24.tar.bz2 /IBSng-A1.24.tar.bz2
 RUN tar -xvjf IBSng-A1.24.tar.bz2 -C /usr/local/
 
-ADD auto-db-conf.py /auto-db-conf.py
+ADD auto-db-conf.py /auto-db-conf.py \
  && chmod +x /auto-db-conf.py
 
 RUN sed -i '114 s/./#&/' /etc/init.d/postgresql
@@ -25,7 +25,7 @@ RUN service postgresql initdb \
  && sleep 2 \
  && su postgres -c 'createuser -s -i -d -r -l -w ibs' \
  && su postgres -c 'createdb IBSng' \
- && su postgres -c 'createlang plpgsql IBSng'
+ && su postgres -c 'createlang plpgsql IBSng' \
  && /auto-db-conf.py
 
 RUN sed -i '1i#coding:utf-8' /usr/local/IBSng/core/lib/IPy.py \
