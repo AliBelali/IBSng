@@ -59,3 +59,6 @@ stop and remove ibsng container:
 start container again with -v option as follow: 
 
     docker run -d -p 80:80 --name IBSng -v /<your pgsql on host path>/pgsql:/varlib/pgsql alibelali/ibsng 
+
+Also there is an alternative way to pull docker from DockerHub:
+https://hub.docker.com/r/alibelali/ibsng
