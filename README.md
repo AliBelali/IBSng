@@ -51,14 +51,14 @@ You can mount postgresql database from your host:
 
 Copy content of postgresql from container to host :
 
-    docker cp IBSng:/var/lib/pgsql /<your path>/pgsql
+    docker cp IBSng:/var/lib/pgsql /var/lib/
     
-stop and remove ibsng container: 
+stop and remove IBSng container: 
 
-    docker rm ibsng -f
+    docker rm IBSng -f
 start container again with -v option as follow: 
 
-    docker run -d -p 80:80 --name IBSng -v /<your pgsql on host path>/pgsql:/varlib/pgsql alibelali/ibsng 
+    docker run -d -p 80:80 --name IBSng -v /var/lib/pgsql/:/var/lib/pgsql/ alibelali/ibsng 
 
 Also there is an alternative way to pull docker from DockerHub:
 https://hub.docker.com/r/alibelali/ibsng
