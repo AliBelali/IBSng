@@ -22,6 +22,20 @@ Limits of This Version:
 - It needs interim updates be enabled in radius client for syncing online users.
 
 Installation:
+
+Method A: Using Github Container Registry
+
+1. Install Docker:
+```
+bash <(curl -sSL https://get.docker.com)
+```
+2. Pull and Run Container:
+```
+docker run -d -p 80:80 --name IBSng ghcr.io/alibelali/ibsng
+```
+
+Method B: Build Docker Image
+
 1. Install Docker:
 ```
 bash <(curl -sSL https://get.docker.com)
