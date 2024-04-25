@@ -34,6 +34,8 @@ bash <(curl -sSL https://get.docker.com)
 docker run -d -p 80:80 --name IBSng ghcr.io/alibelali/ibsng
 ```
 
+
+
 Method B: Build Docker Image
 
 1. Install Docker:
