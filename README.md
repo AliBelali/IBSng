@@ -50,11 +50,11 @@ cd IBSng/
 ```
 3. Build Docker Image
 ```
-docker build -t alibelali/ibsng ./
+docker build -t ghcr.io/alibelali/ibsng ./
 ```
 4. Start Services
 ```
-docker run -d -p 80:80 --name IBSng alibelali/ibsng
+docker run -d -p 80:80 --name IBSng ghcr.io/alibelali/ibsng
 ```
 
 web UI: http://Your-IP/IBSng/admin 
@@ -74,7 +74,5 @@ stop and remove IBSng container:
     docker rm IBSng -f
 start container again with -v option as follow: 
 
-    docker run -d -p 80:80 --name IBSng -v /var/lib/pgsql/:/var/lib/pgsql/ alibelali/ibsng 
+    docker run -d -p 80:80 --name IBSng -v /var/lib/pgsql/:/var/lib/pgsql/ ghcr.io/alibelali/ibsng 
 
-Also there is an alternative way to pull docker from DockerHub:
-https://hub.docker.com/r/alibelali/ibsng
